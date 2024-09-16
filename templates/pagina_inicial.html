@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block estilo %}
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #4caf50;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+nav {
+    background-color: #007bff;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffdd57;
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    nav a {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 1rem;
+    }
+}
+
+main {
+    max-width: 800px;
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+section {
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: black;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+
+{% endblock %}
+
+{% block conteudo %}
+
+<body>
+    <header>
+        <h1>Bem-vindo ao Brasil</h1>
+    </header>
+        <main>
+        <section>
+            <h2>Sobre o Brasil</h2>
+            <p>O Brasil é um país vasto e diversificado, localizado na América do Sul. É dividido em cinco regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul. Cada região é composta por vários estados, e cada estado tem sua capital. Ao todo, o Brasil possui 26 estados e um Distrito Federal, onde está localizada a capital do país, Brasília.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Capitais do Brasil. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+
+{% endblock %}

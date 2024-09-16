@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block estilo %}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+    transition: font-size 0.3s ease, color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+        color: #007bff;
+    }
+}
+
+h1:hover {
+    color: #0056b3;
+}
+
+
+{% endblock%}
+
+{% block conteudo %}
+
+    <h1>Bem-vindo à Nossa Página das Capitais do Brasil</h1>
+
+    <!-- colocar a imagem do mapa do Brasil com todas as capitais aqui! -->
+{% endblock %}

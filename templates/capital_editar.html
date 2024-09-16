@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<form action="{{ url_for('capitais.update', id=capital.id) }}" method="post">
+    <label for="regiao">Região:</label>
+    <select id="regiao" name="regiao" required>
+        <option value="">Selecione a região</option>
+        <option value="norte">Norte</option>
+        <option value="nordeste">Nordeste</option>
+        <option value="centro-oeste">Centro-Oeste</option>
+        <option value="sudeste">Sudeste</option>
+        <option value="sul">Sul</option>
+    </select>
+    <label for="estado">Estado:</label>
+    <input type="text" id="estado" name="estado" value="{{capital.estado}}" required>
+
+    <label for="sigla">Sigla:</label>
+    <input type="text" id="sigla" name="sigla" value="{{capital.sigla}}"  required>
+
+    <label for="capital">Capital:</label>
+    <input type="text" id="capital" name="capital" value="{{capital.capital}}"  required>
+
+   
+
+    <button type="submit">Cadastrar</button>
+</form>
+{% endblock %}

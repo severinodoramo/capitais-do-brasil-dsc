@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block estilo %}
+
+    
+    body {
+       font-family: Arial, sans-serif;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 100vh;
+       margin: 0;
+   }
+   
+   .container {
+       text-align: center;
+   }
+   
+   .btn-principal {
+       background-color: #007bff;
+       color: white;
+       border: none;
+       padding: 10px 20px;
+       font-size: 16px;
+       cursor: pointer;
+       margin-bottom: 10px;
+   }
+   
+   .btn-secundario {
+       background-color: yellow;
+       color: black;
+       border: 1px solid black;
+       padding: 10px 20px;
+       font-size: 16px;
+       cursor: pointer;
+       margin-bottom: 20px;
+       display: block;
+       margin: 10px auto;
+   }
+   
+   table {
+       width: 100%;
+       border-collapse: collapse;
+   }
+   
+   th, td {
+       border: 1px solid black;
+       padding: 10px;
+       text-align: center;
+   }
+   
+   thead {
+       background-color: #f2f2f2;
+   }
+   
+   .btn-editar, .btn-apagar {
+       background-color: white;
+       border: 1px solid black;
+       padding: 5px 10px;
+       cursor: pointer;
+   }
+   
+   .btn-editar:hover {
+       background-color: #e7e7e7;
+   }
+   
+   .btn-apagar:hover {
+       background-color: #f2f2f2;
+   }
+   
+{% endblock %}
+
+
+{% block conteudo %}
+
+    <div class="container">
+        <h2>BUSCAR AS CAPITAIS DO BRASIL</h2>
+
+        <form action="{{ url_for('capitais.recovery') }}" method="post">
+            <button class="btn-secundario">BUSCAR</button>
+        </form>
+        
+        {% if capitais is defined  %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Sigla</th>
+                    <th>Capital</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for capital in capitais %}
+                <tr>
+                    <td>{{ capital.estado }}</td>
+                    <td>{{ capital.sigla }}</td>
+                    <td>{{ capital.capital }}</td>
+                    <td>
+                        <form action="{{url_for('capitais.update', id=capital.id)}}" method="get">
+                            <button class="btn-editar">EDITAR</button>
+                        </form>
+                    </td>
+                    <td>
+                        <button onclick="confirmarEApagar({{capital.id}})" class="btn-apagar">APAGAR</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script>
+            function confirmarEApagar(id){
+                if (confirm('Você tem certeza de que deseja apagar esta capital?')) {
+                    window.location.href = "{{ url_for('capitais.delete', id='') }}"+id;
+                } else {
+                    alert('Ação cancelada.')
+                }
+            }
+        </script>
+        {% endif %}
+    </div>
+
+{% endblock %}

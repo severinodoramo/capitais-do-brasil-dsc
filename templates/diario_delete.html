@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<form action="{{url_for('diario.delete', id=d.id)}}" method="POST">
+  Você realmente deseja excluir a disciplina {{d.disciplina}}?
+  <input type="submit" name="Sim">
+</form>
+<a href="{{url_for('diario.recovery')}}">Cancelar</a>
+
+{% endblock %}

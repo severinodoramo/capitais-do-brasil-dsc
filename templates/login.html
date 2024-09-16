@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block estilo %}
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #f04e23;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me input {
+    margin-right: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #666;
+}
+
+.forgot-password a span {
+    color: #007BFF;
+    text-decoration: underline;
+}
+
+.forgot-password a:hover span {
+    color: #0056b3;
+}
+
+
+{% endblock%}
+
+{% block conteudo %}
+<body>
+  <div class="login-container">
+    <form action="{{url_for('usuario.autenticar')}}" method="post"> 
+      <h2>Faça o seu login</h2>
+      <form>
+          <label for="email">Seu e-mail*</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="senha">Sua senha*</label>
+          <input type="password" id="senha" name="senha" required>
+
+          <div class="remember-me">
+              <input type="checkbox" id="lembrar-me" name="lembrar-me">
+              <label for="lembrar-me">Lembrar-me</label>
+          </div>
+
+          <button type="submit">ENTRAR</button>
+          
+          <div class="forgot-password">
+            <p>
+            Não tem cadastro? Registre-se <a href="{{url_for('usuario.create')}}">aqui</a>
+            </p>
+          </div>
+      </form>
+  </div>
+</body>
+
+{% endblock %}
