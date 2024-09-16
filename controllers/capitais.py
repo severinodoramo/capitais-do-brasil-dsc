@@ -10,8 +10,14 @@ bp_capitais = Blueprint("capitais", __name__, template_folder='templates')
 @login_required
 def recovery():
     id_usuario = current_user.id
-    capitais = Capitais.query.filter_by(id_usuario=id_usuario)
-    return render_template('buscar.html', capitais=capitais)
+    try:
+        capitais = Capitais.query.filter_by(id_usuario=id_usuario)
+        print(capitais[0])
+        return render_template('buscar.html', capitais=capitais)
+    except:
+        return render_template('sem_capitais.html')
+    
+
 
 @bp_capitais.route('/create', methods=['GET', 'POST'])
 @login_required
