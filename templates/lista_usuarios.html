@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
+
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+    <script>alert('{{message}}')</script>
+{% endfor %}
+{% endwith %}
+
 <h2>Lista de Usuários</h2>
 <ul>
     {% for usuario in usuarios %}
@@ -8,4 +15,14 @@
     {% endfor %}
 </ul>
 <a href="{{ url_for('diario.recovery') }}"> > Diário</a>
+<h2>Editar conta</h2>
+<p>Clique <a href="{{url_for('usuario.update')}}">Aqui</a> para editar sua conta</p>
+<h2>Excluir conta</h2>
+<p>Clique <button onclick="deleteUser({{usuario.id}})">Aqui</button> para excluir sua conta</p>
+
+<script>
+    function deleteUser(id) {
+        
+    }
+</script>
 {% endblock %}

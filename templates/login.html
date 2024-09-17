@@ -105,6 +105,13 @@ button:hover {
 {% endblock%}
 
 {% block conteudo %}
+
+{% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        <script>alert('{{message}}')</script>
+    {% endfor %}
+{% endwith %}
+
 <body>
   <div class="login-container">
     <form action="{{url_for('usuario.autenticar')}}" method="post"> 
