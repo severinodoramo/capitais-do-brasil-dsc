@@ -19,8 +19,9 @@ password = os.getenv('DB_PASSWORD')
 host = os.getenv('DB_HOST')
 mydb = os.getenv('DB_DATABASE')
 
-conexao = f"mysql+pymysql://{username}:{password}@{host}/{mydb}"
-app.config['SQLALCHEMY_DATABASE_URI'] = conexao
+# conexao = f"mysql+pymysql://{username}:{password}@{host}/{mydb}"
+conexao_sqlite = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = conexao_sqlite
 
 
 db.init_app(app)

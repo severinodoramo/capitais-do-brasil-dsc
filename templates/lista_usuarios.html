@@ -14,15 +14,22 @@
         <li>{{usuario.nome}} - {{usuario.email}}</li>
     {% endfor %}
 </ul>
+
+{% if usuarios %}
 <a href="{{ url_for('diario.recovery') }}"> > Diário</a>
 <h2>Editar conta</h2>
 <p>Clique <a href="{{url_for('usuario.update')}}">Aqui</a> para editar sua conta</p>
 <h2>Excluir conta</h2>
-<p>Clique <button onclick="deleteUser({{usuario.id}})">Aqui</button> para excluir sua conta</p>
+<p>Clique <button onclick="deleteUser( {{usuario.id}} )">Aqui</button> para excluir sua conta</p>
 
 <script>
     function deleteUser(id) {
-        
+        if (confirm('Você tem certeza de que deseja apagar seu usuário?')) {
+                    window.location.href = "{{ url_for('usuario.delete', id='') }}"+id;
+                } else {
+                    alert('Ação cancelada.')
+                }
     }
 </script>
+{% endif %}
 {% endblock %}

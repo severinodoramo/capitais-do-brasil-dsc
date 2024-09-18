@@ -1,20 +1,31 @@
 from flask import render_template, request, redirect, flash, url_for
 from utils import db, lm
 from models.usuario import Usuario
+from models.capitais import Capitais
+from models.diario import Diario
 from flask import Blueprint
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 import hashlib
 
 bp_usuario = Blueprint("usuario", __name__, template_folder='templates')
 
+@login_required
 @bp_usuario.route('/')
 def home():
     return redirect(url_for('usuario.recovery'))
 
+@login_required
 @bp_usuario.route('/recovery')
 def recovery():
     dados = Usuario.query.all()
-    return render_template('lista_usuarios.html', usuarios=dados)
+    if current_user.is_authenticated:
+        usuario_atual = Usuario.query.filter_by(id=current_user.id).first()
+        return render_template('lista_usuarios.html', usuarios=dados, usuario=usuario_atual)
+    else:
+        try:
+            return render_template('lista_usuarios.html', usuarios=dados)
+        except:
+            return redirect(url_for('login'))
 
 @bp_usuario.route('/create', methods=['GET', 'POST'])
 def create():
@@ -117,7 +128,24 @@ def update():
         
 @bp_usuario.route('/delete')
 def delete():
-    usuario = Usuario.query.filter_by(id=id, id_usuario=current_user.id).first()
-    db.session.delete(usuario)
-    db.session.commit()
-    return render_template('login.html')
+    if current_user.is_authenticated:
+        id = current_user.id
+        # logout_user()
+
+        capitais = Capitais.query.filter_by(id_usuario=id).all()
+        for capital in capitais:
+            db.session.delete(capital)
+        db.session.commit()
+        
+
+        diarios = Diario.query.filter_by(id_usuario=id).all()
+        for diario in diarios:
+            db.session.delete(diario)
+        db.session.commit()
+
+        usuario = Usuario.query.filter_by(id=id).first()
+        db.session.delete(usuario)
+        db.session.commit()
+
+        return redirect(url_for('usuario.logoff'))
+    
